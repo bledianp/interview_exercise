@@ -43,7 +43,7 @@ export class MessageResolver {
     private messageLogic: MessageLogic,
     private safeguardingService: SafeguardingService,
     private chatMessageDataLoader: ChatMessageDataLoader,
-  ) {}
+  ) { }
 
   @UseGuards(GqlAuthGuardForReference)
   @ResolveReference()
@@ -129,7 +129,7 @@ export class MessageResolver {
     @Args('likeMessageDto') likeMessageDto: LikeMessageDto,
     @AuthenticatedUser() authenticatedUser: IAuthenticatedUser,
   ): Promise<ChatMessage> {
-    await this.messageLogic.like(likeMessageDto, authenticatedUser);
+    return await this.messageLogic.like(likeMessageDto, authenticatedUser);
   }
 
   @Mutation(() => ChatMessage)
@@ -176,7 +176,7 @@ export class RichMessageContentResolver {
   constructor(
     private chatMessageDataLoader: ChatMessageDataLoader,
     private messageLogic: MessageLogic,
-  ) {}
+  ) { }
 
   @ResolveField('reply', () => ChatMessage, { nullable: true })
   async getReplyMessage(
